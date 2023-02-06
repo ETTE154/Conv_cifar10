@@ -121,3 +121,31 @@ ax2.legend()
 plt.show()
 #====================================================================================================
 # %%
+
+from IPython.display import SVG
+from keras.utils.vis_utils import model_to_dot
+
+SVG(model_to_dot(model, show_shapes=True).create(prog='dot', format='svg'))
+
+#====================================================================================================
+# %%
+
+# 모델 전체를 저장
+model.save('my_model.h5') # 모델 저장
+
+# 최적의 가중치만 저장
+model.save_weights('weight001') # 가중치 저장
+
+# 또는 콜백 함수를 사용하여 가중치 저장
+# from keras.callbacks import ModelCheckpoint
+# checkpointer = ModelCheckpoint(filepath='my_model_weights.h5', monitor='val_loss', verbose=1, save_best_only=True)
+#====================================================================================================
+
+# 모델 불러오기
+from keras.models import load_model
+model = load_model('my_model.h5') # 모델 불러오기
+
+# 가중치 불러오기
+model.load_weights('weight001') # 가중치 불러오기
+#====================================================================================================
+# %%
